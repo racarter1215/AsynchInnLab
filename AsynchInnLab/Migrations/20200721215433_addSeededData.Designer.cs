@@ -3,14 +3,16 @@ using AsynchInnLab.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AsynchInnLab.Migrations
 {
     [DbContext(typeof(AsynchInDbContext))]
-    partial class AsynchInDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200721215433_addSeededData")]
+    partial class addSeededData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
