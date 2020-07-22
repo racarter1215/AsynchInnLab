@@ -38,6 +38,9 @@ namespace AsynchInnLab
 
             //register my Dependency Injection Services
             services.AddTransient<IHotel, HotelRepository>();
+            services.AddTransient<IAmenity, AmenityRepository>();
+            services.AddTransient<IRoom, RoomRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
