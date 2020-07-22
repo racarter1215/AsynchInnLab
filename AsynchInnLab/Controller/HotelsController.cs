@@ -50,26 +50,6 @@ namespace AsynchInnLab.Controller
             }
             var updatedHotel = await _hotel.Update(hotel);
             return Ok(updatedHotel);
-
-            //_context.Entry(hotel).State = EntityState.Modified;
-
-            // try
-            //  {
-            //     await _context.SaveChangesAsync();
-            //  }
-            //   catch (DbUpdateConcurrencyException)
-            //   {
-            //       if (!HotelExists(id))
-            //       {
-            //           return NotFound();
-            //       }
-            //       else
-            //       {
-            //           throw;
-        //        }
-            //   }
-
-            //   return NoContent();
         }
 
         // POST: api/Hotels

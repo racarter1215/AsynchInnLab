@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AsynchInnLab.Models.Interfaces
 {
-    interface IRoom
+    public interface IRoom
     {
         //contains methods and properties that are required for the classes to implement
 

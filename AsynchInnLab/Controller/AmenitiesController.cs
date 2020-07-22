@@ -47,8 +47,8 @@ namespace AsynchInnLab.Controller
             {
                 return BadRequest();
             }
-            var updatedHotel = await _amenity.Update(amenity);
-            return Ok(updatedHotel);
+            var updatedAmenity = await _amenity.Update(amenity);
+            return Ok(updatedAmenity);
         }
 
         // POST: api/Amenities

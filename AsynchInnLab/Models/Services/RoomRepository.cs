@@ -1,53 +1,57 @@
-﻿using System;
+﻿using AsynchInnLab.Data;
+using AsynchInnLab.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsynchInnLab.Models.Services
 {
-    public class RoomRepository
+    public class RoomRepository : IRoom
     {
         private AsynchInDbContext _context;
-        public HotelRepository(AsynchInDbContext context)
+        public RoomRepository(AsynchInDbContext context)
         {
             _context = context;
         }
         public async Task<Room> Create(Room room)
         {
             // when I have a hotel, i want to add themto the database.
-            _context.Entry(hotel).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            _context.Entry(room).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();
 
-            return hotel;
+            return room;
 
         }
 
         public async Task Delete(int id)
         {
-            Hotel hotel = await GetHotel(id);
+            Room room = await GetRoom(id);
 
-            _context.Entry(hotel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.Entry(room).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Hotel> GetHotel(int id)
+        public async Task<Room> GetRoom(int id)
         {
             //look in the database on the student table, where the id is equal to the id that was brought in as an argument
-            Hotel hotel = await _context.Hotels.FindAsync(id);
-            return hotel;
+            Room room = await _context.Rooms.FindAsync(id);
+            return room;
         }
 
-        public async Task<List<Hotel>> GetHotels()
+        public async Task<List<Room>> GetRooms()
         {
-            var hotels = await _context.Hotels.ToListAsync();
-            return hotels;
+            var rooms = await _context.Rooms.ToListAsync();
+            return rooms;
         }
 
-        public async Task<Hotel> Update(Hotel hotel)
+        public async Task<Room> Update(Room room)
         {
-            _context.Entry(hotel).State = EntityState.Modified;
+            _context.Entry(room).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return hotel;
+            return room;
         }
     }
 }
