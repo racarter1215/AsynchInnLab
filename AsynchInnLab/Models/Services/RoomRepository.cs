@@ -53,5 +53,35 @@ namespace AsynchInnLab.Models.Services
             await _context.SaveChangesAsync();
             return room;
         }
+        /// <summary>
+        /// add a room and an amenity together
+        /// </summary>
+        /// <param name="amenityId">a type of amenity</param>
+        /// <param name="roomId">a particular room in the hotel</param>
+        /// <returns>modified room with amenities</returns>
+        public async Task AddAmenity(int amenityId, int roomId)
+        {
+            RoomAmenities roomAmenities = new RoomAmenities()
+            {
+                RoomId = roomId,
+                AmenitiesId = amenityId
+            };
+
+            _context.Entry(roomAmenities).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+            
+        }
+        /// <summary>
+        /// removes amenity from a room
+        /// </summary>
+        /// <param name="roomId">sets the room in question</param>
+        /// <param name="amenityId">sets the amenity in question</param>
+        /// <returns>room without given amenity</returns>
+        public async Task RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            var result = _context.RoomAmenity.FirstOrDefault(x => x.RoomId == roomId && x.AmenitiesId == amenityId);
+            _context.Entry(result).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
     }
 }
