@@ -56,18 +56,37 @@ namespace AsynchInnLab.Controller
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
             
-            public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<Room>> PostRoom(Room room)
         {
-                await _room.Create(room);
-                return CreatedAtAction("GetRoom", new { id = room.Id }, room);
-            }
+            await _room.Create(room);
+            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
+        }
 
+        [HttpPost]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        //POST: api/Room/{roomId}/{amenityId}
+        //Model Binding
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
+        {
+            await _room.AddAmenity(roomId, amenityId);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{roomId}/Amenity/{amenityId}")]
+        public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            await _room.RemoveAmenityFromRoom(roomId, amenityId);
+            return Ok();
+        }
         // DELETE: api/Rooms/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Room>> DeleteRoom(int id)
         {
                 await _room.Delete(id);
                 return NoContent();                
-        }        
+        }
+        
+
     }
 }

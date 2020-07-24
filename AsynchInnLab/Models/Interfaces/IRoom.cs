@@ -25,6 +25,13 @@ namespace AsynchInnLab.Models.Interfaces
         //delete
         Task Delete(int id);
 
-        
+        Task AddAmenity(int amenityId, int roomId);
+        /// <summary>
+        /// removes an amenity from a romm
+        /// </summary>
+        /// <param name="roomId">the room in question</param>
+        /// <param name="amenityId">the amenity to remove</param>
+        /// <returns>the room in question without the amenity</returns>
+        Task RemoveAmenityFromRoom(int roomId, int amenityId);
     }
 }
