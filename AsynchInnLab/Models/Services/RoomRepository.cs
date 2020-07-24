@@ -53,5 +53,17 @@ namespace AsynchInnLab.Models.Services
             await _context.SaveChangesAsync();
             return room;
         }
+
+        public async Task AddAmenity(int studentId, int courseId)
+        {
+            Enrollments enrollment = new Enrollments()
+            {
+                courseId = courseId,
+                studentId = studentId
+            };
+
+            _context.Entry(enrollment).State = EntityState.Added;
+            await _context.SaveChangesAsync();
+        }
     }
 }
