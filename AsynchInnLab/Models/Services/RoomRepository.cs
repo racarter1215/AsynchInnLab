@@ -38,6 +38,9 @@ namespace AsynchInnLab.Models.Services
         {
             //look in the database on the student table, where the id is equal to the id that was brought in as an argument
             Room room = await _context.Rooms.FindAsync(id);
+            //include all of the amenities that the room has
+            var amenities = await _context.RoomAmenity.Where(x => x.RoomId == id).ToListAsync();
+            room.RoomAmenities = amenities;
             return room;
         }
 
