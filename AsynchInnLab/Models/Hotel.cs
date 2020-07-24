@@ -15,7 +15,6 @@ namespace AsynchInnLab.Models
         public string PhoneNumber { get; set; }
 
         //Navigation Properties
-        public HotelRoom HotelRoom { get; set; }
 
     }
 }

@@ -11,6 +11,5 @@ namespace AsynchInnLab.Models
         public string Name { get; set; }
 
         //Navigation Properties
-        public RoomAmenities RoomAmenities { get; set; }
     }
 }

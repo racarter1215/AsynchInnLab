@@ -25,6 +25,6 @@ namespace AsynchInnLab.Models.Interfaces
         //delete
         Task Delete(int id);
 
-        public async Task AddAmenity(int studentId, int courseId)
+        
     }
 }
