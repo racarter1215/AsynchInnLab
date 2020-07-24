@@ -24,5 +24,7 @@ namespace AsynchInnLab.Models.Interfaces
 
         //delete
         Task Delete(int id);
+
+        
     }
 }

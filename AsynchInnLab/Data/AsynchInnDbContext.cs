@@ -17,6 +17,11 @@ namespace AsynchInnLab.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //this tells the db that the enrollments table has a combo compositie key of the amenitiesid and roomid
+            //modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelId, x.RoomNumber });
+            modelBuilder.Entity<RoomAmenities>().HasKey(x => new { x.AmenitiesId, x.RoomId });
+
+
             modelBuilder.Entity<Hotel>().HasData(
                 new Hotel
                 {
@@ -93,5 +98,7 @@ namespace AsynchInnLab.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<RoomAmenities> RoomAmenity { get; set; }
+        //public DbSet<HotelRoom> HotelRoom { get; set; }
     }
 }
