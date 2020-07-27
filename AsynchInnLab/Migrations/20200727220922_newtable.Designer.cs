@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsynchInnLab.Migrations
 {
     [DbContext(typeof(AsynchInDbContext))]
-    [Migration("20200721215433_addSeededData")]
-    partial class addSeededData
+    [Migration("20200727220922_newtable")]
+    partial class newtable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,30 @@ namespace AsynchInnLab.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AsynchInnLab.Models.HotelRoom", b =>
+                {
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PetFriendly")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HotelId", "RoomNumber");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("HotelRoom");
+                });
+
             modelBuilder.Entity("AsynchInnLab.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -144,6 +168,51 @@ namespace AsynchInnLab.Migrations
                             Layout = "1 Bedroom",
                             Name = "Seattle Saloon"
                         });
+                });
+
+            modelBuilder.Entity("AsynchInnLab.Models.RoomAmenity", b =>
+                {
+                    b.Property<int>("AmenityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AmenityId", "RoomId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomAmenities");
+                });
+
+            modelBuilder.Entity("AsynchInnLab.Models.HotelRoom", b =>
+                {
+                    b.HasOne("AsynchInnLab.Models.Hotel", "Hotel")
+                        .WithMany("HotelRooms")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AsynchInnLab.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AsynchInnLab.Models.RoomAmenity", b =>
+                {
+                    b.HasOne("AsynchInnLab.Models.Amenity", "Amenity")
+                        .WithMany("RoomAmenities")
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AsynchInnLab.Models.Room", "Room")
+                        .WithMany("RoomAmenities")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

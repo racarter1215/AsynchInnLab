@@ -17,34 +17,59 @@ namespace AsynchInnLab.Models.Services
         {
             _context = context;
         }
-        public async Task<HotelRoom> Create(HotelRoom hotelRoom)
+        /// <summary>
+        /// this creates a Hotelroom and adds it to database
+        /// </summary>
+        /// <param name="amenity">the specific Hotelroom to add</param>
+        /// <returns>a new Hotelroom</returns>
+        public async Task<HotelRoom> Create(HotelRoom hotelRoom, int hotelId)
         {
             _context.Entry(hotelRoom).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();
             return hotelRoom;
         }
-
+        /// <summary>
+        /// this deletes a Hotelroom from the database
+        /// </summary>
+        /// <param name="id">the specific Hotelroom to delete</param>
+        /// <returns>when all Hotelrooms are searched, this one does not show up anymore</returns>
         public async Task Delete(int roomNumber, int hotelId)
         {
             var hotelRoom = await GetAHotelRoom(roomNumber, hotelId);
             _context.Entry(hotelRoom).State = EntityState.Deleted;
         }
-
+        /// <summary>
+        /// finds a specific Hotelroom using its id number
+        /// </summary>
+        /// <param name="id">the id number associated with the Hotelroom</param>
+        /// <returns>the Hotelroom in question</returns>
         public async Task<HotelRoom> GetAHotelRoom(int roomNumber, int hotelId)
         {
-            var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
+            //var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
 
-            var room = _context.HotelRoom.Where(x => x.HotelId == hotelId && x.RoomNumber == roomNumber).Include(x => x.Room).SingleAsync();
-            return hotelRoom;
+            var room = await _context.HotelRoom.Where(x => x.HotelId == hotelId && x.RoomNumber == roomNumber)
+                .Include(x => x.Room)
+                .ThenInclude(x => x.RoomAmenities)
+                .ThenInclude(x => x.Amenity)
+                .Include(x => x.Hotel)
+                .FirstOrDefaultAsync();
+            return room;
         }
-
+        /// <summary>
+        /// presents a list of all Hotelrooms
+        /// </summary>
+        /// <returns>the full list of Hotelrooms</returns>
         public async Task<List<HotelRoom>> GetHotelRooms(int hotelId)
         {
             List<HotelRoom> hotelRooms = await _context.HotelRoom.Where(x => x.HotelId == hotelId).ToListAsync();
             return hotelRooms;
         }
-
-        public async Task Update(HotelRoom hotelRoom)
+        /// <summary>
+        /// updates the characteristics of an existing Hotelroom
+        /// </summary>
+        /// <param name="amenity">the Hotelroom to update</param>
+        /// <returns>the updated Hotelroom</returns>
+        public async Task Update(int hotelId, int roomNumber, HotelRoom hotelRoom)
         {
             _context.Entry(hotelRoom).State = EntityState.Modified;
             await _context.SaveChangesAsync();

@@ -20,7 +20,7 @@ namespace AsynchInnLab.Data
             //this tells the db that the enrollments table has a combo compositie key of the amenitiesid and roomid
             //modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelId, x.RoomNumber });
             modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelId, x.RoomNumber });
-            modelBuilder.Entity<RoomAmenities>().HasKey(x => new { x.AmenitiesId, x.RoomId });
+            modelBuilder.Entity<RoomAmenity>().HasKey(x => new { x.AmenityId, x.RoomId });
 
 
             modelBuilder.Entity<Hotel>().HasData(
@@ -100,7 +100,7 @@ namespace AsynchInnLab.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Amenity> Amenities { get; set; }
-        public DbSet<RoomAmenities> RoomAmenity { get; set; }
+        public DbSet<RoomAmenity> RoomAmenities { get; set; }
         public DbSet<HotelRoom> HotelRoom { get; set; }
     }
 }
