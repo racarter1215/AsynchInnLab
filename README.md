@@ -39,6 +39,9 @@
 ![App Image 2](./assets/lab13-solution1.png)
 ![App Image 2](./assets/lab13-solution2.png)
 
+### Lab 14 Postman
+![App Image 2](./assets/lab14-solution1.png)
+
 #### Change Log
 
 ###### 1.4: Application added navigation properties between classes - 23 July 2020

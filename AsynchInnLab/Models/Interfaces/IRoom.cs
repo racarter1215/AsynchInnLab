@@ -8,21 +8,38 @@ namespace AsynchInnLab.Models.Interfaces
     public interface IRoom
     {
         //contains methods and properties that are required for the classes to implement
-
-        //create
+        /// <summary>
+        /// creates a new Room in the database
+        /// </summary>
+        /// <param name="hotel">a Room</param>
+        /// <returns>a new Room</returns>
         Task<Room> Create(Room room);
 
-        //read
-        //get all
+        /// <summary>
+        /// get all existing Rooms in the database
+        /// </summary>
+        /// <returns>the full list of Rooms</returns>
         Task<List<Room>> GetRooms();
 
-        //get individually (by id)
+        /// <summary>
+        /// search for an Room by id number
+        /// </summary>
+        /// <param name="id">the specific Room associated with the id</param>
+        /// <returns>the Room in question</returns>
         Task<Room> GetRoom(int id);
 
-        //update
+        /// <summary>
+        /// update an existing Room
+        /// </summary>
+        /// <param name="hotel">the specific Room to update</param>
+        /// <returns>the updated Room</returns>
         Task<Room> Update(Room room);
 
-        //delete
+        /// <summary>
+        /// deletes the specific Room
+        /// </summary>
+        /// <param name="id">the Room to be deleted's id</param>
+        /// <returns>the list of Rooms without the deleted one</returns>
         Task Delete(int id);
 
         Task AddAmenity(int amenityId, int roomId);

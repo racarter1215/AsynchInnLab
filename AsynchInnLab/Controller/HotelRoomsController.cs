@@ -24,8 +24,8 @@ namespace AsynchInnLab.Controller
         }
 
         // GET: api/HotelRooms
-        [HttpGet, Route("{hotelId}/Rooms")]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRoom(int hotelId)
+        [HttpGet, Route("/api/Hotels/{hotelId}/Rooms")]
+        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms(int hotelId)
         {
             return await _hotelRoom.GetHotelRooms(hotelId);
         }
@@ -34,7 +34,7 @@ namespace AsynchInnLab.Controller
         [HttpGet("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
         public async Task<ActionResult<HotelRoom>> GetAHotelRoom(int roomNumber, int hotelId)
         {
-            var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
+            var hotelRoom = await _hotelRoom.GetAHotelRoom(roomNumber, hotelId);
 
             if (hotelRoom == null)
             {
@@ -46,16 +46,16 @@ namespace AsynchInnLab.Controller
         // PUT: api/HotelRooms/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
         public async Task<IActionResult> PutHotelRoom(int hotelId, int roomNumber, HotelRoom hotelRoom)
         {
-            if (hotelId != hotelRoom.HotelId || roomNumber != )
+            if (hotelId != hotelRoom.HotelId || roomNumber != hotelRoom.RoomNumber)
             {
                 return BadRequest();
             }
 
             //update
-            await _hotelRoom.Update(hotelRoom);
+            await _hotelRoom.Update(hotelId, roomNumber, hotelRoom);
             return NoContent();
         }
 
@@ -66,12 +66,12 @@ namespace AsynchInnLab.Controller
         public async Task<ActionResult<HotelRoom>> PostHotelRoom(HotelRoom hotelRoom, int hotelId)
         {
             hotelRoom.HotelId = hotelId;
-            await _hotelRoom.Create(hotelRoom);
+            await _hotelRoom.Create(hotelRoom, hotelId);
             return CreatedAtAction("GetHotelRoom", new { id = hotelRoom.HotelId }, hotelRoom);
         }
 
         // DELETE: api/HotelRooms/5
-        [HttpDelete("{id}")]
+        [HttpDelete("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
         public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(int roomNumber, int hotelId)
         {
             await _hotelRoom.Delete(roomNumber, hotelId);

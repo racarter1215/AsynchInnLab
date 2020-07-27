@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace AsynchInnLab
 {
@@ -28,7 +29,7 @@ namespace AsynchInnLab
         {
             //this is where all of our dependencies are going to live.
             //Enable the use of using controllers within the MVC convention
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             //Register with the app that the database exists and what options to use for it.
             services.AddDbContext<AsynchInDbContext>(options =>
@@ -40,6 +41,7 @@ namespace AsynchInnLab
             services.AddTransient<IHotel, HotelRepository>();
             services.AddTransient<IAmenity, AmenityRepository>();
             services.AddTransient<IRoom, RoomRepository>();
+            services.AddTransient<IHotelRoom, HotelRoomRepository>();
 
         }
 

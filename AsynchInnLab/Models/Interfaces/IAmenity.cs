@@ -8,21 +8,39 @@ namespace AsynchInnLab.Models.Interfaces
     public interface IAmenity
     {
         //contains methods and properties that are required for the classes to implement
-
-        //create
+        /// <summary>
+        /// creates a new amenity in the database
+        /// </summary>
+        /// <param name="hotel">an Amenity</param>
+        /// <returns>a new Amenity</returns>
         Task<Amenity> Create(Amenity hotel);
 
-        //read
-        //get all
+        
+        /// <summary>
+        /// get all existing amenities in the database
+        /// </summary>
+        /// <returns>the full list of amenities</returns>
         Task<List<Amenity>> GetAmenities();
 
-        //get individually (by id)
+        /// <summary>
+        /// search for an amenity by id number
+        /// </summary>
+        /// <param name="id">the specific amenity associated with the id</param>
+        /// <returns>the amenity in question</returns>
         Task<Amenity> GetAmenity(int id);
 
-        //update
+        /// <summary>
+        /// update an existing amenity
+        /// </summary>
+        /// <param name="hotel">the specific amenity to update</param>
+        /// <returns>the updated amenity</returns>
         Task<Amenity> Update(Amenity hotel);
 
-        //delete
+        /// <summary>
+        /// deletes the specific amenity
+        /// </summary>
+        /// <param name="id">the amenity to be deleted's id</param>
+        /// <returns>the list of amenities without the deleted one</returns>
         Task Delete(int id);
     }
 }

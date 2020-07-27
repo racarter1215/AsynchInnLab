@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace AsynchInnLab.Models
 {
-    public class RoomAmenities
+    public class RoomAmenity
     {
-        public int AmenitiesId { get; set; }
+        public int AmenityId { get; set; }
         public int RoomId { get; set; }
 
         //Navigation Properties
