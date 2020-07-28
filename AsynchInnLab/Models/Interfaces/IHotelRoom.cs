@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AsynchInnLab.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// <param name="hotel">a Hotelroom</param>
         /// <returns>a new Hotelroom</returns>
         /// 
-        Task<HotelRoom> Create(HotelRoom hotelRoom, int hotelId);
+        Task<HotelRoomDTO> Create(HotelRoom hotelRoom, int hotelId);
 
         /// <summary>
         /// update an existing Hotelroom
@@ -22,7 +23,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// <param name="hotel">the specific Hotelroom to update</param>
         /// <returns>the updated Hotelroom</returns>
 
-        Task Update(int hotelId, int roomNumber, HotelRoom hotelRoom);
+        Task Update(int hotelId, int roomNumber, HotelRoomDTO hotelRoom);
 
         /// <summary>
         /// deletes the specific Hotelroom
@@ -36,13 +37,14 @@ namespace AsynchInnLab.Models.Interfaces
         /// get all existing Hotelrooms in the database
         /// </summary>
         /// <returns>the full list of Hotelrooms</returns>
-        Task<List<HotelRoom>> GetHotelRooms(int hotelId);
+        Task<List<HotelRoomDTO>> GetHotelRooms(int hotelId);
 
         /// <summary>
         /// search for an Hotelroom by id number
         /// </summary>
         /// <param name="id">the specific Hotelroom associated with the id</param>
         /// <returns>the Hotelroom in question</returns>
-        Task<HotelRoom> GetAHotelRoom(int roomNumber, int hotelId);
+        Task<HotelRoomDTO> GetAHotelRoom(int roomNumber, int hotelId);
+        
     }
 }

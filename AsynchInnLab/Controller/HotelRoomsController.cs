@@ -9,6 +9,7 @@ using AsynchInnLab.Data;
 using AsynchInnLab.Models;
 using AsynchInnLab.Models.Interfaces;
 using Microsoft.Extensions.FileProviders;
+using AsynchInnLab.Models.DTO;
 
 namespace AsynchInnLab.Controller
 {
@@ -25,14 +26,14 @@ namespace AsynchInnLab.Controller
 
         // GET: api/HotelRooms
         [HttpGet, Route("/api/Hotels/{hotelId}/Rooms")]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms(int hotelId)
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms(int hotelId)
         {
             return await _hotelRoom.GetHotelRooms(hotelId);
         }
 
         // GET: api/HotelRooms/5
         [HttpGet("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetAHotelRoom(int roomNumber, int hotelId)
+        public async Task<ActionResult<HotelRoomDTO>> GetAHotelRoom(int roomNumber, int hotelId)
         {
             var hotelRoom = await _hotelRoom.GetAHotelRoom(roomNumber, hotelId);
 
@@ -47,9 +48,9 @@ namespace AsynchInnLab.Controller
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelId, int roomNumber, HotelRoom hotelRoom)
+        public async Task<IActionResult> PutHotelRoom(int hotelId, int roomNumber, HotelRoomDTO hotelRoom)
         {
-            if (hotelId != hotelRoom.HotelId || roomNumber != hotelRoom.RoomNumber)
+            if (hotelId != hotelRoom.HotelID || roomNumber != hotelRoom.RoomNumber)
             {
                 return BadRequest();
             }
