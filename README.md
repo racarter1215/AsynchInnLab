@@ -4,7 +4,7 @@
 ##### Lab14-APIs & Controllers
 ##### Lab16-DTOs and Testing
 ##### Authors: Robert Carter, Paul Rest, Michael Refvem
-##### Collaboration: Bryant Davis
+##### Collaboration: Bryant Davis, Peyton Cysewski
 
 
 ### Description
