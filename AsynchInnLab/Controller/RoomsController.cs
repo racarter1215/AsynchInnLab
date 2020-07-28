@@ -32,7 +32,7 @@ namespace AsynchInnLab.Controller
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             RoomDTO room = await _room.GetRoom(id);
             return room;

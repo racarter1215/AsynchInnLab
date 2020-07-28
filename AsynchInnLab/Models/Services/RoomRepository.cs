@@ -1,6 +1,7 @@
 ﻿using AsynchInnLab.Data;
 using AsynchInnLab.Models.DTO;
 using AsynchInnLab.Models.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using System;
@@ -22,13 +23,19 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="amenity">the specific Room to add</param>
         /// <returns>a new Room</returns>
-        public async Task<Room> Create(Room room)
+        public async Task<RoomDTO> Create(RoomDTO dto)
         {
-            // when I have a hotel, i want to add themto the database.
-            _context.Entry(room).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            Room room = new Room()
+            {
+                Name = dto.Name,
+                Layout = dto.Layout
+            };
+            
+            _context.Entry(room).State = EntityState.Added;
             await _context.SaveChangesAsync();
 
-            return room;
+            dto.ID = room.Id;
+            return dto;
 
         }
         /// <summary>
@@ -38,7 +45,7 @@ namespace AsynchInnLab.Models.Services
         /// <returns>when all Rooms are searched, this one does not show up anymore</returns>
         public async Task Delete(int id)
         {
-            Room room = await GetRoom(id);
+            Room room = _context.Rooms.Find(id);
 
             _context.Entry(room).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();

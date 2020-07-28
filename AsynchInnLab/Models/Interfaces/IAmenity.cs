@@ -14,7 +14,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// </summary>
         /// <param name="hotel">an Amenity</param>
         /// <returns>a new Amenity</returns>
-        Task<AmenityDTO> Create(Amenity hotel);
+        Task<Amenity> Create(Amenity hotel);
 
         
         /// <summary>

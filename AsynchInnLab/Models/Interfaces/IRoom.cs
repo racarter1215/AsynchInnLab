@@ -14,7 +14,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// </summary>
         /// <param name="hotel">a Room</param>
         /// <returns>a new Room</returns>
-        Task<Room> Create(Room room);
+        Task<RoomDTO> Create(RoomDTO room);
 
         /// <summary>
         /// get all existing Rooms in the database

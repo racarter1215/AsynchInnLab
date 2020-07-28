@@ -1,4 +1,5 @@
 ﻿using AsynchInnLab.Data;
+using AsynchInnLab.Models.DTO;
 using AsynchInnLab.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -22,7 +23,7 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="amenity">the specific Hotelroom to add</param>
         /// <returns>a new Hotelroom</returns>
-        public async Task<HotelRoom> Create(HotelRoom hotelRoom, int hotelId)
+        public async Task<HotelRoomDTO> Create(HotelRoom hotelRoom, int hotelId)
         {
             _context.Entry(hotelRoom).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();
@@ -43,26 +44,45 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="id">the id number associated with the Hotelroom</param>
         /// <returns>the Hotelroom in question</returns>
-        public async Task<HotelRoom> GetAHotelRoom(int roomNumber, int hotelId)
+        public async Task<HotelRoomDTO> GetAHotelRoom(int roomNumber, int hotelId)
         {
-            //var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
-
             var room = await _context.HotelRoom.Where(x => x.HotelId == hotelId && x.RoomNumber == roomNumber)
                 .Include(x => x.Room)
                 .ThenInclude(x => x.RoomAmenities)
                 .ThenInclude(x => x.Amenity)
                 .Include(x => x.Hotel)
                 .FirstOrDefaultAsync();
-            return room;
+            HotelRoomDTO hotelRoom = new HotelRoomDTO()
+            {
+                HotelID = room.HotelId,
+                RoomNumber = room.RoomNumber,
+                Rate = room.Rate,
+                PetFriendly = room.PetFriendly,
+                RoomID = room.RoomId
+
+            };
+            return hotelRoom;
         }
         /// <summary>
         /// presents a list of all Hotelrooms
         /// </summary>
         /// <returns>the full list of Hotelrooms</returns>
-        public async Task<List<HotelRoom>> GetHotelRooms(int hotelId)
+        public async Task<List<HotelRoomDTO>> GetHotelRooms(int hotelId)
         {
-            List<HotelRoom> hotelRooms = await _context.HotelRoom.Where(x => x.HotelId == hotelId).ToListAsync();
-            return hotelRooms;
+            var hotelRooms = await _context.HotelRoom.ToListAsync();
+            List<HotelRoomDTO> dtos = new List<HotelRoomDTO>();
+            foreach (var item in hotelRooms)
+            {
+                dtos.Add(new HotelRoomDTO() 
+                {
+                    HotelID = item.HotelId,
+                    RoomNumber = item.RoomNumber,
+                    Rate = item.Rate,
+                    PetFriendly = item.PetFriendly,
+                    RoomID = item.RoomId
+                });
+            }
+            return dtos;
         }
         /// <summary>
         /// updates the characteristics of an existing Hotelroom

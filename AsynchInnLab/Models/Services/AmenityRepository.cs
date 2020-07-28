@@ -38,7 +38,7 @@ namespace AsynchInnLab.Models.Services
         /// <returns>when all amenitys are searched, this one does not show up anymore</returns>
         public async Task Delete(int id)
         {
-            Amenity amenity = await GetAmenity(id);
+            AmenityDTO amenity = await GetAmenity(id);
 
             _context.Entry(amenity).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             await _context.SaveChangesAsync();
