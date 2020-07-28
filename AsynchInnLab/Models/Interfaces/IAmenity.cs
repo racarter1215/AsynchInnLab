@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AsynchInnLab.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,21 +14,21 @@ namespace AsynchInnLab.Models.Interfaces
         /// </summary>
         /// <param name="hotel">an Amenity</param>
         /// <returns>a new Amenity</returns>
-        Task<Amenity> Create(Amenity hotel);
+        Task<AmenityDTO> Create(Amenity hotel);
 
         
         /// <summary>
         /// get all existing amenities in the database
         /// </summary>
         /// <returns>the full list of amenities</returns>
-        Task<List<Amenity>> GetAmenities();
+        Task<List<AmenityDTO>> GetAmenities();
 
         /// <summary>
         /// search for an amenity by id number
         /// </summary>
         /// <param name="id">the specific amenity associated with the id</param>
         /// <returns>the amenity in question</returns>
-        Task<Amenity> GetAmenity(int id);
+        Task<AmenityDTO> GetAmenity(int id);
 
         /// <summary>
         /// update an existing amenity

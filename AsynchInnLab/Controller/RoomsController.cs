@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AsynchInnLab.Data;
 using AsynchInnLab.Models;
 using AsynchInnLab.Models.Interfaces;
+using AsynchInnLab.Models.DTO;
 
 namespace AsynchInnLab.Controller
 {
@@ -24,7 +25,7 @@ namespace AsynchInnLab.Controller
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             return await _room.GetRooms();
         }
@@ -33,7 +34,7 @@ namespace AsynchInnLab.Controller
         [HttpGet("{id}")]
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
-            Room room = await _room.GetRoom(id);
+            RoomDTO room = await _room.GetRoom(id);
             return room;
         }
 

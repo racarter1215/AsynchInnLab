@@ -1,4 +1,5 @@
 ﻿using AsynchInnLab.Data;
+using AsynchInnLab.Models.DTO;
 using AsynchInnLab.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -47,19 +48,29 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="id">the id number associated with the amenity</param>
         /// <returns>the amenity in question</returns>
-        public async Task<Amenity> GetAmenity(int id)
+        public async Task<AmenityDTO> GetAmenity(int id)
         {
             Amenity amenity = await _context.Amenities.FindAsync(id);
-            return amenity;
+            AmenityDTO dto = new AmenityDTO()
+            {
+                Name = amenity.Name,
+                ID = amenity.Id
+            };
+            return dto;
         }
         /// <summary>
         /// presents a list of all amenities
         /// </summary>
         /// <returns>the full list of amenities</returns>
-        public async Task<List<Amenity>> GetAmenities()
+        public async Task<List<AmenityDTO>> GetAmenities()
         {
             var amenities = await _context.Amenities.ToListAsync();
-            return amenities;
+            List<AmenityDTO> dtos = new List<AmenityDTO>();
+            foreach(var item in amenities)
+            {
+                dtos.Add(new AmenityDTO(){Name = item.Name, ID = item.Id });
+            }
+            return dtos;
         }
         /// <summary>
         /// updates the characteristics of an existing amenity
