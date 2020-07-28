@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AsynchInnLab.Data;
 using AsynchInnLab.Models;
 using AsynchInnLab.Models.Interfaces;
+using AsynchInnLab.Models.DTO;
 
 namespace AsynchInnLab.Controller
 {
@@ -24,16 +25,16 @@ namespace AsynchInnLab.Controller
 
         // GET: api/Amenities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             return await _amenity.GetAmenities();
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenity>> GetAmenity(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
-            Amenity amenity = await _amenity.GetAmenity(id);
+            AmenityDTO amenity = await _amenity.GetAmenity(id);
             return amenity;
         }
 

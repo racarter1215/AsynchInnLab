@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AsynchInnLab.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,14 +20,14 @@ namespace AsynchInnLab.Models.Interfaces
         /// get all existing Rooms in the database
         /// </summary>
         /// <returns>the full list of Rooms</returns>
-        Task<List<Room>> GetRooms();
+        Task<List<RoomDTO>> GetRooms();
 
         /// <summary>
         /// search for an Room by id number
         /// </summary>
         /// <param name="id">the specific Room associated with the id</param>
         /// <returns>the Room in question</returns>
-        Task<Room> GetRoom(int id);
+        Task<RoomDTO> GetRoom(int id);
 
         /// <summary>
         /// update an existing Room

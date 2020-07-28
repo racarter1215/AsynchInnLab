@@ -1,4 +1,5 @@
 ﻿using AsynchInnLab.Data;
+using AsynchInnLab.Models.DTO;
 using AsynchInnLab.Models.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
@@ -47,24 +48,31 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="id">the id number associated with the Room</param>
         /// <returns>the Room in question</returns>
-        public async Task<Room> GetRoom(int id)
-        {
-            //look in the database on the student table, where the id is equal to the id that was brought in as an argument
+        public async Task<RoomDTO> GetRoom(int id)
+        {      
             Room room = await _context.Rooms.FindAsync(id);
-            //include all of the amenities that the room has
-            var amenities = await _context.RoomAmenities.Where(x => x.RoomId == id).ToListAsync();
-            room.RoomAmenities = amenities;
-            return room;
+            RoomDTO dto = new RoomDTO()
+            {
+                Name = room.Name,
+                ID = room.Id
+            };
+            return dto;
         }
         /// <summary>
         /// presents a list of all Rooms
         /// </summary>
         /// <returns>the full list of Rooms</returns>
-        public async Task<List<Room>> GetRooms()
+        public async Task<List<RoomDTO>> GetRooms()
         {
-            var rooms = await _context.Rooms.Include(room => room.RoomAmenities).ThenInclude(roomamenity => roomamenity.Amenity).ToListAsync();
-            return rooms;
+            var rooms = await _context.Rooms.ToListAsync();
+            List<RoomDTO> dtos = new List<RoomDTO>();
+            foreach (var item in rooms)
+            {
+                dtos.Add(new RoomDTO() { Name = item.Name, ID = item.Id, Layout = item.Layout });
+            }
+            return dtos;
         }
+    
         /// <summary>
         /// updates the characteristics of an existing Room
         /// </summary>
