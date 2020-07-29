@@ -16,6 +16,7 @@
 ##### The flow of information is now an interface interacts with both the controller and repository for a table, and grabs data from the repository upon request and sends it to the controller.
 ##### The ERD classes are linked via navigation properties. RoomAmenities, for example, is linked to both Room and Amenities. One can now add and subtract amenities from a room.
 ##### DTOs have been added to give information to the user while providing a level of security and privacy for information that they do not request or require.
+##### Users are able to regiseter user data, including names, passwords, and email addresses, and login based on them being saved in the database
 
 #### Getting started
 
@@ -43,6 +44,10 @@
 
 ### Lab 14 Postman
 ![App Image 2](./assets/lab14-solution1.png)
+
+### Lab 17 Identity
+![App Image 1](./assets/lab17-solution1.png)
+![App Image 2](./assets/lab17-solution2.png)
 
 #### Change Log
 
