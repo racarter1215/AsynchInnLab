@@ -57,10 +57,10 @@ namespace AsynchInnLab.Controller
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
             
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<RoomDTO>> PostRoom(RoomDTO room)
         {
             await _room.Create(room);
-            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
+            return CreatedAtAction("GetRoom", new { id = room.ID }, room);
         }
 
         [HttpPost]

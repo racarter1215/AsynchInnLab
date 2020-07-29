@@ -23,7 +23,7 @@ namespace AsynchInnLab.Models.Services
         /// </summary>
         /// <param name="amenity">the specific Hotelroom to add</param>
         /// <returns>a new Hotelroom</returns>
-        public async Task<HotelRoomDTO> Create(HotelRoom hotelRoom, int hotelId)
+        public async Task<HotelRoom> Create(HotelRoom hotelRoom, int hotelId)
         {
             _context.Entry(hotelRoom).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             await _context.SaveChangesAsync();

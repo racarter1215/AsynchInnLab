@@ -1,4 +1,5 @@
 ﻿using AsynchInnLab.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AsynchInnLab.Data
 {
-    public class AsynchInDbContext : DbContext
+    public class AsynchInDbContext : IdentityDbContext<ApplicationUser>
     {
         public AsynchInDbContext(DbContextOptions<AsynchInDbContext> options) : base(options)
         {
@@ -17,6 +18,8 @@ namespace AsynchInnLab.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             //this tells the db that the enrollments table has a combo compositie key of the amenitiesid and roomid
             //modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelId, x.RoomNumber });
             modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelId, x.RoomNumber });
