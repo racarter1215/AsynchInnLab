@@ -15,7 +15,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// <param name="hotel">a Hotelroom</param>
         /// <returns>a new Hotelroom</returns>
         /// 
-        Task<HotelRoomDTO> Create(HotelRoom hotelRoom, int hotelId);
+        Task<HotelRoom> Create(HotelRoom hotelRoom, int hotelId);
 
         /// <summary>
         /// update an existing Hotelroom
@@ -23,7 +23,7 @@ namespace AsynchInnLab.Models.Interfaces
         /// <param name="hotel">the specific Hotelroom to update</param>
         /// <returns>the updated Hotelroom</returns>
 
-        Task Update(int hotelId, int roomNumber, HotelRoomDTO hotelRoom);
+        Task Update(int hotelId, int roomNumber, HotelRoom hotelRoom);
 
         /// <summary>
         /// deletes the specific Hotelroom

@@ -48,9 +48,9 @@ namespace AsynchInnLab.Controller
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("/api/Hotels/{hotelId}/Rooms/{roomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int hotelId, int roomNumber, HotelRoomDTO hotelRoom)
+        public async Task<IActionResult> PutHotelRoom(int hotelId, int roomNumber, HotelRoom hotelRoom)
         {
-            if (hotelId != hotelRoom.HotelID || roomNumber != hotelRoom.RoomNumber)
+            if (hotelId != hotelRoom.HotelId || roomNumber != hotelRoom.RoomNumber)
             {
                 return BadRequest();
             }

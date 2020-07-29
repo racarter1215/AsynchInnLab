@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsynchInnLab.Data;
+using AsynchInnLab.Models;
 using AsynchInnLab.Models.Interfaces;
 using AsynchInnLab.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +38,10 @@ namespace AsynchInnLab
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AsynchInDbContext>()
+                .AddDefaultTokenProviders();
 
             //register my Dependency Injection Services
             services.AddTransient<IHotel, HotelRepository>();
